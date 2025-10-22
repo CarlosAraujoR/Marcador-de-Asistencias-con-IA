@@ -1,13 +1,22 @@
+''''
+Capture multiple Faces from multiple users to be stored on a DataBase (dataset directory)
+	==> Faces will be stored on a directory: dataset/ (if does not exist, pls create one)
+	==> Each face will have a unique numeric integer ID as 1, 2, 3, etc                       
+
+Based on original code by Anirban Kar: https://github.com/thecodacus/Face-Recognition
+
+Developed by Marcelo Rovai - MJRoBot.org @ 21Feb18
+
+'''
+
 import cv2
 import os
-
 
 cam = cv2.VideoCapture(0)
 cam.set(3, 640) # set video width
 cam.set(4, 480) # set video height
 
-cascade_path = cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
-face_detector = cv2.CascadeClassifier(cascade_path)
+face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 # For each person, enter one numeric face id
 face_id = input('\n enter user id end press <return> ==>  ')
@@ -33,10 +42,10 @@ while(True):
 
         cv2.imshow('image', img)
 
-    k = cv2.waitKey(100) & 0xff # Presiona 'ESC' para salir
+    k = cv2.waitKey(100) & 0xff # Press 'ESC' for exiting video
     if k == 27:
         break
-    elif count >= 30: # Toma 30 imagenes del rostro y detener video
+    elif count >= 30: # Take 30 face sample and stop video
          break
 
 # Do a bit of cleanup
